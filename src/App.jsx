@@ -10,9 +10,9 @@ import { Suspense } from "react"
 function App() {
 
   const LoginPage = lazy(() => import("./pages/LoginPage"))
-  const CardsPage = lazy(() => import("./pages/CardsPage"))
-  const FormPage = lazy(() => import("./pages/FormPage"))
-  const QueriesPage = lazy(() => import("./pages/QueriesPage"))
+  const ProductosPage = lazy(() => import("./pages/ProductosPage"))
+  const RegistroPage = lazy(() => import("./pages/RegistroPage"))
+  const ClientesPage = lazy(() => import("./pages/ClientesPage"))
 
   return (
     <>
@@ -21,11 +21,11 @@ function App() {
           <div className="mb-5 w-full h-5 rounded-b-lg bg-gray-500/40 shadow-lg shadow-gray-400/50"></div>
           <div className="container mx-auto">
             <Routes>
-              <Route path="/" index element={<Navigate to={"/login"} />} />
+              <Route path="/" index element={<Navigate to={"/productos"} />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/cards" element={<CardsPage />} />
-              <Route path="/form" element={<FormPage />} />
-              <Route path="/queries" element={<QueriesPage />} />
+              <Route path="/productos" element={<ProductosPage />} />
+              <Route path="/registro" element={<RegistroPage />} />
+              <Route path="/clientes" element={<ClientesPage />} />
             </Routes>
           </div>
         </Router>

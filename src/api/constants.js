@@ -14,7 +14,7 @@ export const get = async (url) => {
     
     const data = await response.json()
     // console.log(data);
-    result[0] = data.object
+    result[0] = data
     return result
   }
   catch (ex) {
@@ -59,4 +59,37 @@ export const post = async (url, body) => {
     }
     return result
   }
+}
+
+export const deleteU = async (url) => {
+  let result = [null, null]
+  try {
+    const response = await fetch(`${url}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+
+    if (!response.ok) {
+      result[1] = {
+        status: response.status,
+        message: `Error: ${response.statusText}` //...
+      }
+      return result
+    }
+
+    const data = await response.json()
+    // console.log(data);
+    result[0] = data
+    return result
+  }
+  catch (ex) {
+    result[1] = {
+      status: 500,
+      message: "Internal error.",
+      ex
+    }
+    return result
+  } 
 }

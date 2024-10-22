@@ -53,7 +53,7 @@ const list = [
   }
 ]
 
-function CardsPage() {
+function ProductosPage() {
   return (
     <>
       <h1 className="text-4xl font-semibold text-center mb-7">
@@ -84,7 +84,7 @@ function CardsPage() {
                 </p>
               </div>
               <Link
-                to={"/form"}
+                to={"/registro"}
                 className="w-full py-2 font-semibold text-lg text-white text-center rounded-md bg-orange-500 outline-white hover:bg-orange-400 duration-75"
               >
                 Cotizar
@@ -97,4 +97,4 @@ function CardsPage() {
   );
 }
 
-export default CardsPage;
+export default ProductosPage;

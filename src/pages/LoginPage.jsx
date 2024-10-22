@@ -47,7 +47,7 @@ function LoginPage() {
       setAlert({
         show: true,
         success: false,
-        message: result.mensaje
+        message: result.mensaje || "Error interno"
       })
     } else {
       setAlert({
@@ -56,10 +56,9 @@ function LoginPage() {
         message: result.mensaje
       })
       setTimeout(() => {
-        navigate("/queries")
+        navigate("/clientes")
       }, 2000)
     }
-
     setLoading(false)
   }
 
