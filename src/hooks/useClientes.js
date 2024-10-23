@@ -1,4 +1,4 @@
-import { BASE_URL, get, post } from "../api/constants";
+import { BASE_URL, deleteU, get, post } from "../api/constants";
 
 export const useClientes = () => {
   return {
@@ -29,8 +29,13 @@ export const useClientes = () => {
       return data
     },
 
-    deleteUsuario: async (id) => {
+    deleteCliente: async (id) => {
       const [data, error] = await deleteU(`${BASE_URL}/cliente/eliminarCliente/${id}`)
+      console.log({
+        data,
+        error
+      });
+      
       if (error) {
         console.log(error);
         return {}

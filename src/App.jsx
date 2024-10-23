@@ -6,6 +6,7 @@ import {
 } from "react-router-dom"
 import { Navigate } from "react-router-dom"
 import { Suspense } from "react"
+import Navbar from "./components/navbar/Navbar"
 
 function App() {
 
@@ -18,15 +19,17 @@ function App() {
     <>
       <Suspense fallback="...">
         <Router>
-          <div className="mb-5 w-full h-5 rounded-b-lg bg-gray-500/40 shadow-lg shadow-gray-400/50"></div>
-          <div className="container mx-auto">
-            <Routes>
-              <Route path="/" index element={<Navigate to={"/productos"} />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/productos" element={<ProductosPage />} />
-              <Route path="/registro" element={<RegistroPage />} />
-              <Route path="/clientes" element={<ClientesPage />} />
-            </Routes>
+          <Navbar />
+          <div className="relative">
+            <div className="container mt-5 mx-auto pb-10">
+              <Routes>
+                <Route path="/*" index element={<Navigate to={"/productos"} />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/productos" element={<ProductosPage />} />
+                <Route path="/registro/:id" element={<RegistroPage />} />
+                <Route path="/clientes" element={<ClientesPage />} />
+              </Routes>
+            </div>
           </div>
         </Router>
       </Suspense>

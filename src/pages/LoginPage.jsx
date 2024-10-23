@@ -5,6 +5,8 @@ import { useUsuarios } from "../hooks/useUsuarios";
 import CircularProgress from '@mui/material/CircularProgress';
 import background from "../assets/images/backgrounds/edificios_contrapicado.jpg"
 import { useNavigate } from "react-router-dom";
+import { userStore } from "../store/userStore";
+import { Navigate } from "react-router-dom";
 
 const defaultValues = {
   usuario: "",
@@ -21,13 +23,15 @@ function LoginPage() {
     defaultValues
   })
   const { login } = useUsuarios()
+  const navigate = useNavigate()
+
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({
     show: false,
     success: false,
     message: ""
   });
-  const navigate = useNavigate()
+
 
   const onSubmit = async (data) => {
     setLoading(true)
@@ -56,12 +60,18 @@ function LoginPage() {
         message: result.mensaje
       })
       setTimeout(() => {
+        setLogged(true)
         navigate("/clientes")
       }, 2000)
     }
     setLoading(false)
   }
 
+  const { logged, setLogged } = userStore()
+  if (logged) {
+    return <Navigate to={"/productos"} />
+  }
+  
   return (
     <>
       <div className="absolute top-0 left-0 w-full h-screen flex justify-center items-center">

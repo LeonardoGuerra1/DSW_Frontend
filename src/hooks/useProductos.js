@@ -1,5 +1,4 @@
-import { get } from "react-hook-form";
-import { BASE_URL } from "../api/constants";
+import { BASE_URL, get } from "../api/constants";
 
 export const useProductos = () => {
   return {

@@ -6,6 +6,9 @@ import { useClientes } from "../hooks/useClientes"
 import { useState } from "react"
 import check from "../assets/images/icons/check.png"
 import error from "../assets/images/icons/error.png"
+import { useProductos } from "../hooks/useProductos"
+import { useParams } from "react-router-dom"
+import { useEffect } from "react"
 
 const defaultValues = {
   nombre: "",
@@ -25,6 +28,7 @@ const emailRegex = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-
 const phoneRegex = /^(9\d{8})$/
 
 function RegistroPage() {
+  const [producto, setProducto] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [result, setResult] = useState({
@@ -35,8 +39,18 @@ function RegistroPage() {
     defaultValues
   })
 
+  const { id } = useParams()
+  const { getProductoPorId } = useProductos()
+  useEffect(() => {
+    getProductoPorId(id)
+    .then(res => {
+      setProducto(res.object.nombreProducto)
+    })
+  }, []);
+
   const navigate = useNavigate()
   const { saveCliente } = useClientes()
+
   const onSubmit = async (data) => {
     setLoading(true)
     const result = await saveCliente(JSON.stringify(data))
@@ -137,7 +151,7 @@ function RegistroPage() {
             />
 
             <TextField
-              label="Detalla tu solicitud"
+              label="Requerimiento"
               className="w-full"
               slotProps={{
                 input: { className: "bg-white" }
@@ -145,12 +159,10 @@ function RegistroPage() {
               {...register("producto", {
                 required
               })}
+              value={producto}
               error={errors.producto ? true : false}
               helperText={errors.producto?.message}
-              multiline
-              minRows={4}
-              maxRows={7}
-              />
+            />
 
             <div className="w-full flex justify-center gap-x-5 items-center">
               <button
@@ -160,7 +172,7 @@ function RegistroPage() {
                 Enviar
               </button>
               <Link
-                to={"/cards"}
+                to={"/productos"}
                 className="w-60 py-2 text-white text-center text-xl rounded-md outline-none bg-gray-500/80 hover:bg-gray-400 duration-75"
                 type="button"
               >
