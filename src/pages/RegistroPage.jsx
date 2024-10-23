@@ -35,7 +35,7 @@ function RegistroPage() {
     success: false,
     message: ""
   });
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm({
     defaultValues
   })
 
@@ -44,6 +44,7 @@ function RegistroPage() {
   useEffect(() => {
     getProductoPorId(id)
     .then(res => {
+      setValue("producto", res.object.nombreProducto)
       setProducto(res.object.nombreProducto)
     })
   }, []);
